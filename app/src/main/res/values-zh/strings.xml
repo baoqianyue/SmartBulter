@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">来自Barack</string>
+    <string name="activity_setting">设置</string>
 </resources>

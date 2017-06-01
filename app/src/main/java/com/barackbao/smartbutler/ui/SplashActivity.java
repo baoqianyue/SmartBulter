@@ -62,4 +62,12 @@ public class SplashActivity extends AppCompatActivity {
 
         tv_splash = (TextView) findViewById(R.id.tv_splash);
     }
+
+
+    //在此页面禁止返回键
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+    }
 }

@@ -7,7 +7,6 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.barackbao.smartbutler.MainActivity;
 import com.barackbao.smartbutler.R;
 import com.barackbao.smartbutler.utils.ShareUtils;
 import com.barackbao.smartbutler.utils.StaticClass;
@@ -30,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
                     if (isFirst()) {
                         startActivity(new Intent(SplashActivity.this, GuideActivity.class));
                     } else {
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        startActivity(new Intent(SplashActivity.this, GuideActivity.class));
                     }
                     finish();
                     break;

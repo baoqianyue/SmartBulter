@@ -25,7 +25,9 @@
             android:name=".ui.SettingActivity"
             android:label="@string/activity_setting"/>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".ui.GuideActivity"/>
+        <activity
+            android:name=".ui.GuideActivity"
+            android:theme="@style/WindowFullScreenTheme"/>
     </application>
 
 </manifest>

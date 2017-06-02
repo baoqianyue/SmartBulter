@@ -11,6 +11,7 @@ import com.barackbao.smartbutler.MainActivity;
 import com.barackbao.smartbutler.R;
 import com.barackbao.smartbutler.utils.ShareUtils;
 import com.barackbao.smartbutler.utils.StaticClass;
+import com.barackbao.smartbutler.utils.UtilTools;
 
 /**
  * Created by BarackBao on 2017/6/1.
@@ -61,6 +62,7 @@ public class SplashActivity extends AppCompatActivity {
         handler.sendEmptyMessageDelayed(StaticClass.HANDLER_SPLASH, 2000);
 
         tv_splash = (TextView) findViewById(R.id.tv_splash);
+        UtilTools.setFont(SplashActivity.this, tv_splash);
     }
 
 

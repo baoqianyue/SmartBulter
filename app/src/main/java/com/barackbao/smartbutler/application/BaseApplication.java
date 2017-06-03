@@ -16,6 +16,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        //初始化Bmob
         Bmob.initialize(getApplicationContext(), StaticClass.BMOB_APP_ID);
     }
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="10dp">
+
+    <EditText
+        android:id="@+id/username_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="用户名"/>
+
+    <EditText
+        android:id="@+id/password_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="密码"
+        android:inputType="textPassword"/>
+
+    <EditText
+        android:id="@+id/password_again_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="再输入一次密码"
+        android:inputType="textPassword"/>
+
+    <EditText
+        android:id="@+id/email_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="邮箱"
+        android:inputType="textEmailAddress"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="注册成功后需要前往邮箱验证，否则无法登录!"
+        android:textColor="@color/colorAccent"/>
+
+    <Button
+        android:id="@+id/registered_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/button_bg"
+        android:text="注册"
+        android:textColor="@android:color/white"/>
+
+
+</LinearLayout>

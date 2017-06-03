@@ -70,7 +70,8 @@ public class RegisteredActivity extends BaseActivity implements View.OnClickList
                                     Toast.makeText(RegisteredActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
                                     finish();
                                 } else {
-                                    Toast.makeText(RegisteredActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegisteredActivity.this, "注册失败" + e.toString(),
+                                            Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

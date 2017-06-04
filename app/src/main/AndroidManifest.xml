@@ -46,6 +46,7 @@
         <activity
             android:name=".ui.RegisteredActivity"
             android:label="注册"/>
+        <activity android:name=".ui.ForgetActivity"/>
     </application>
 
 </manifest>

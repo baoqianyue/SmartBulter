@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.*;
 
 import com.barackbao.smartbutler.MainActivity;
 import com.barackbao.smartbutler.R;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText password_edt;
     private Button login_in_btn;
     private CheckBox store_password_cb;
+    private TextView login_forget_password_tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +47,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         password_edt = (EditText) findViewById(R.id.login_password_edt);
         registered_btn = (Button) findViewById(R.id.login_registered_btn);
         login_in_btn = (Button) findViewById(R.id.login_in_btn);
+        login_forget_password_tv = (TextView) findViewById(R.id.login_forget_password_tv);
+        login_forget_password_tv.setOnClickListener(this);
         registered_btn.setOnClickListener(this);
         login_in_btn.setOnClickListener(this);
 
         //如果用户保存了密码，下次登录的时候就将保存的数据读取出来
-        if (ShareUtils.getBoolean(this,"storepassword",true)){
-            username_edt.setText(ShareUtils.getString(this,"username",""));
-            password_edt.setText(ShareUtils.getString(this,"password",""));
-            store_password_cb.setChecked(ShareUtils.getBoolean(this,"storepassword",false));
+        if (ShareUtils.getBoolean(this, "storepassword", true)) {
+            username_edt.setText(ShareUtils.getString(this, "username", ""));
+            password_edt.setText(ShareUtils.getString(this, "password", ""));
+            store_password_cb.setChecked(ShareUtils.getBoolean(this, "storepassword", false));
         }
         //恢复上次checkBox的状态
 
@@ -91,6 +95,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 } else {
                     Toast.makeText(this, "输入框不能为空", Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.login_forget_password_tv:
+                startActivity(new Intent(LoginActivity.this, ForgetActivity.class));
+                break;
         }
     }
 

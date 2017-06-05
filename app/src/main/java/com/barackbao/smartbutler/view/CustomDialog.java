@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.barackbao.smartbutler.R;
+import com.barackbao.smartbutler.ui.RegisteredActivity;
 
 
 /**
@@ -41,10 +42,9 @@ public class CustomDialog extends Dialog {
     }
 
     //创建实例
-    public CustomDialog(Context context, int width, int height, int layout, int style, int gravity){
-        this(context,width,height,layout,style,gravity,R.style.pop_dialog_anim);
+    public CustomDialog(Context context, int width, int height, int layout, int style, int gravity) {
+        this(context, width, height, layout, style, gravity, R.style.pop_dialog_anim);
     }
-
 
 
 }

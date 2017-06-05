@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,6 +15,7 @@ import android.widget.*;
 import com.barackbao.smartbutler.MainActivity;
 import com.barackbao.smartbutler.R;
 import com.barackbao.smartbutler.utils.ShareUtils;
+import com.barackbao.smartbutler.view.CustomDialog;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button login_in_btn;
     private CheckBox store_password_cb;
     private TextView login_forget_password_tv;
+    private CustomDialog login_wait_cdi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         login_forget_password_tv.setOnClickListener(this);
         registered_btn.setOnClickListener(this);
         login_in_btn.setOnClickListener(this);
+        login_wait_cdi = new CustomDialog(this, 100, 100, R.layout.dialog_loading, R.style.Theme_Dialog,
+                Gravity.CENTER, R.style.pop_dialog_anim);
+        //屏幕点击无效
+        login_wait_cdi.setCancelable(false);
 
         //如果用户保存了密码，下次登录的时候就将保存的数据读取出来
         if (ShareUtils.getBoolean(this, "storepassword", true)) {
@@ -72,12 +79,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String username = username_edt.getText().toString().trim();
                 String password = password_edt.getText().toString().trim();
                 if (!TextUtils.isEmpty(username) & !TextUtils.isEmpty(password)) {
+                    login_wait_cdi.show();
                     final BmobUser user = new BmobUser();
                     user.setUsername(username);
                     user.setPassword(password);
                     user.login(new SaveListener<BmobUser>() {
                         @Override
                         public void done(BmobUser bmobUser, BmobException e) {
+                            login_wait_cdi.dismiss();
                             if (e == null) {
                                 if (user.getEmailVerified()) {
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));

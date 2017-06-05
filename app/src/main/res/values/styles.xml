@@ -17,4 +17,9 @@
         <!--分界线-->
     </style>
 
+    <style name="pop_dialog_anim">
+        <item name="android:windowEnterAnimation">@anim/pop_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_out</item>
+    </style>
+
 </resources>

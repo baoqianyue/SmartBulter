@@ -15,7 +15,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        //Bmob
+        //bmob仓库
         maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
     }
 }

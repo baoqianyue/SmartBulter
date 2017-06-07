@@ -17,17 +17,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:background="@drawable/user_bg"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-
-                    android:id="@+id/profile_image"
+                    android:id="@+id/user_icon_img"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:src="@drawable/profile"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="#FF000000"/>
+                    android:src="@drawable/user_profile"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="2dp"/>
 
                 <TextView
                     android:id="@+id/edit_user_tv"

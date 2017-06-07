@@ -1,10 +1,14 @@
 package com.barackbao.smartbutler.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,9 @@ import android.widget.Toast;
 
 import com.barackbao.smartbutler.R;
 import com.barackbao.smartbutler.ui.LoginActivity;
+import com.barackbao.smartbutler.view.CustomDialog;
+
+import java.io.File;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -31,7 +38,10 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     private EditText edit_username_edt;
     private Button edit_user_go_btn;
     private Button user_exit_login_btn;
-
+    private CustomDialog photo_dialog;
+    private Button dialog_photo_camera_btn;
+    private Button dialog_photo_album_btn;
+    private Button dialog_photo_cancel_btn;
 
     @Nullable
     @Override
@@ -48,11 +58,22 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         edit_user_tv = (TextView) view.findViewById(R.id.edit_user_tv);
         edit_user_go_btn = (Button) view.findViewById(R.id.edit_user_go_btn);
         user_exit_login_btn = (Button) view.findViewById(R.id.user_exit_login_btn);
+        user_icon_img.setOnClickListener(this);
         user_exit_login_btn.setOnClickListener(this);
         edit_user_tv.setOnClickListener(this);
         edit_user_go_btn.setOnClickListener(this);
 
-
+        //dialog
+        photo_dialog = new CustomDialog(getContext(), 0, 0, R.layout.dialog_photo, R.style.pop_dialog_anim
+                , Gravity.BOTTOM, 0);
+        //提示框外无法点击
+        photo_dialog.setCancelable(false);
+        dialog_photo_camera_btn = (Button) photo_dialog.findViewById(R.id.dialog_photo_camera);
+        dialog_photo_album_btn = (Button) photo_dialog.findViewById(R.id.dialog_photo_album);
+        dialog_photo_cancel_btn = (Button) photo_dialog.findViewById(R.id.dialog_photo_cancel);
+        dialog_photo_album_btn.setOnClickListener(this);
+        dialog_photo_cancel_btn.setOnClickListener(this);
+        dialog_photo_camera_btn.setOnClickListener(this);
         //设置输入框不可编辑
         edit_username_edt.setEnabled(false);
 
@@ -97,6 +118,65 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 }
 
                 break;
+            case R.id.user_icon_img:
+                photo_dialog.show();
+                break;
+            case R.id.dialog_photo_camera:
+                toCamera();
+                break;
+            case R.id.dialog_photo_album:
+                toAlbum();
+                break;
+            case R.id.dialog_photo_cancel:
+                photo_dialog.dismiss();
+                break;
         }
+    }
+
+    public static final String PHOTO_IMAGE_FILE_NAME = "fileImg.jpg";
+    public static final int CAMERA_REQUEST_CODE = 100;
+    public static final int ALBUM_REQUEST_CODE = 101;
+
+
+    private void toAlbum() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, ALBUM_REQUEST_CODE);
+        photo_dialog.dismiss();
+    }
+
+    private void toCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //判断内存卡是否可用，可用的话就进行储存
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                Uri.fromFile(new File(Environment.getExternalStorageDirectory(), PHOTO_IMAGE_FILE_NAME)));
+        startActivityForResult(intent, CAMERA_REQUEST_CODE);
+        photo_dialog.dismiss();
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        //判断内存卡是否有空间
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+//                PHOTO_IMAGE_FILE_NAME)));
+//        startActivityForResult(intent, CAMERA_REQUEST_CODE);
+//        photo_dialog.dismiss();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != getActivity().RESULT_CANCELED) {
+            switch (requestCode) {
+                //进入相册
+                case ALBUM_REQUEST_CODE:
+                    cutImage(data.getData());
+                    break;
+                //进入相机
+                case CAMERA_REQUEST_CODE:
+                    File tempFile = new File(Environment.getExternalStorageDirectory(), PHOTO_IMAGE_FILE_NAME);
+                    cutImage(Uri.fromFile(tempFile));
+                    break;
+            }
+        }
+    }
+
+    private void cutImage(Uri uri) {
     }
 }

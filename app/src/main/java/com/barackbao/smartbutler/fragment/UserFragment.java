@@ -136,6 +136,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     public static final String PHOTO_IMAGE_FILE_NAME = "fileImg.jpg";
     public static final int CAMERA_REQUEST_CODE = 100;
     public static final int ALBUM_REQUEST_CODE = 101;
+    public static final int RESULT_REQUEST_CODE = 102;
+    File tempFile = null;
 
 
     private void toAlbum() {
@@ -170,13 +172,36 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                     break;
                 //进入相机
                 case CAMERA_REQUEST_CODE:
-                    File tempFile = new File(Environment.getExternalStorageDirectory(), PHOTO_IMAGE_FILE_NAME);
+                    tempFile = new File(Environment.getExternalStorageDirectory(), PHOTO_IMAGE_FILE_NAME);
                     cutImage(Uri.fromFile(tempFile));
+                    break;
+                case RESULT_REQUEST_CODE:
+                    //处理返回的已裁剪的图片
+
+
                     break;
             }
         }
     }
 
+    //设置裁剪
     private void cutImage(Uri uri) {
+        if (uri == null) {
+            return;
+        }
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        //设置裁剪
+        intent.putExtra("crop", true);
+        //设置裁宽高比例
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        //设置裁剪后的大小
+        intent.putExtra("outputX", 320);
+        intent.putExtra("outputY", 320);
+        //设置返回
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, RESULT_REQUEST_CODE);
+        //
     }
 }

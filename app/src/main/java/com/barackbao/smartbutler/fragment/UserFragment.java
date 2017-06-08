@@ -1,6 +1,8 @@
 package com.barackbao.smartbutler.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -22,6 +24,7 @@ import com.barackbao.smartbutler.R;
 import com.barackbao.smartbutler.ui.LoginActivity;
 import com.barackbao.smartbutler.view.CustomDialog;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import cn.bmob.v3.BmobUser;
@@ -177,10 +180,22 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                     break;
                 case RESULT_REQUEST_CODE:
                     //处理返回的已裁剪的图片
-
-
+                    if (data != null) {
+                        setImageToView(data);
+                    }
+                    if (tempFile != null) {
+                        tempFile.delete();
+                    }
                     break;
             }
+        }
+    }
+
+    private void setImageToView(Intent data) {
+        Bundle bundle = data.getExtras();
+        if (bundle != null) {
+            Bitmap image = bundle.getParcelable("data");
+            user_icon_img.setImageBitmap(image);
         }
     }
 
@@ -203,5 +218,19 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         intent.putExtra("return-data", true);
         startActivityForResult(intent, RESULT_REQUEST_CODE);
         //
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //保存图片
+        BitmapDrawable drawable = (BitmapDrawable) user_icon_img.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        //先将bitmap压缩成字节数组输出流
+        ByteArrayOutputStream byStream = new ByteArrayOutputStream()；
+        bitmap.compress(Bitmap.CompressFormat.PNG,80,byStream);
+
+
     }
 }

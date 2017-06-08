@@ -12,7 +12,6 @@ import android.view.MenuItem;
 public class BaseActivity extends AppCompatActivity {
 
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +20,8 @@ public class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    //菜单栏操作
+    //菜单栏操作,返回操作
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -11,6 +11,8 @@ public class StaticClass {
     public static final String IS_First_USE = "isFirst";
     //Bmob App Id
     public static final String BMOB_APP_ID = "0e0719ef69ebb5da0f9bfbf6361fed0c";
+    //保存用户头像
+    public static final String SOLVE_USER_ICON = "image_title";
 
 
 }

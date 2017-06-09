@@ -2,6 +2,7 @@ package com.barackbao.smartbutler.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +25,10 @@ import android.widget.Toast;
 import com.barackbao.smartbutler.R;
 import com.barackbao.smartbutler.ui.LoginActivity;
 import com.barackbao.smartbutler.view.CustomDialog;
+import com.barackbao.smartbutler.utils.ShareUtils;
+import com.barackbao.smartbutler.utils.StaticClass;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
@@ -65,6 +70,15 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         user_exit_login_btn.setOnClickListener(this);
         edit_user_tv.setOnClickListener(this);
         edit_user_go_btn.setOnClickListener(this);
+        String solvedUserIcon = ShareUtils.getString(getContext(), StaticClass.SOLVE_USER_ICON, "");
+        if (!solvedUserIcon.equals("")) {
+            //先将字符串转换为输入流
+            byte[] byteArray = Base64.decode(solvedUserIcon, Base64.DEFAULT);
+            ByteArrayInputStream byStream = new ByteArrayInputStream(byteArray);
+            Bitmap userIcon = BitmapFactory.decodeStream(byStream);
+            user_icon_img.setImageBitmap(userIcon);
+        }
+
 
         //dialog
         photo_dialog = new CustomDialog(getContext(), 0, 0, R.layout.dialog_photo, R.style.pop_dialog_anim
@@ -228,9 +242,12 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         BitmapDrawable drawable = (BitmapDrawable) user_icon_img.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         //先将bitmap压缩成字节数组输出流
-        ByteArrayOutputStream byStream = new ByteArrayOutputStream()；
-        bitmap.compress(Bitmap.CompressFormat.PNG,80,byStream);
-
-
+        ByteArrayOutputStream byStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byStream);
+        //用Base64将字节数组转换成字符串
+        byte[] byteArray = byStream.toByteArray();
+        String imgString = new String(Base64.encode(byteArray, Base64.DEFAULT));
+        //将代表图片的字符串保存起来
+        ShareUtils.putString(getContext(), StaticClass.SOLVE_USER_ICON, imgString);
     }
 }

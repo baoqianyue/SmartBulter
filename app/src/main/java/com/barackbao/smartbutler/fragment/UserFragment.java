@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.barackbao.smartbutler.R;
+import com.barackbao.smartbutler.ui.CourierActivity;
 import com.barackbao.smartbutler.ui.LoginActivity;
 import com.barackbao.smartbutler.view.CustomDialog;
 import com.barackbao.smartbutler.utils.ShareUtils;
@@ -50,6 +51,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     private Button dialog_photo_camera_btn;
     private Button dialog_photo_album_btn;
     private Button dialog_photo_cancel_btn;
+    private TextView user_courier_tv;
 
     @Nullable
     @Override
@@ -66,6 +68,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         edit_user_tv = (TextView) view.findViewById(R.id.edit_user_tv);
         edit_user_go_btn = (Button) view.findViewById(R.id.edit_user_go_btn);
         user_exit_login_btn = (Button) view.findViewById(R.id.user_exit_login_btn);
+        user_courier_tv = (TextView) view.findViewById(R.id.user_courier_tv);
+        user_courier_tv.setOnClickListener(this);
         user_icon_img.setOnClickListener(this);
         user_exit_login_btn.setOnClickListener(this);
         edit_user_tv.setOnClickListener(this);
@@ -146,6 +150,9 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.dialog_photo_cancel:
                 photo_dialog.dismiss();
+                break;
+            case R.id.user_courier_tv:
+                startActivity(new Intent(getContext(), CourierActivity.class));
                 break;
         }
     }

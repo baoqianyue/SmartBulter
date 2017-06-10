@@ -85,12 +85,23 @@
                     android:text="归属地查询"
                     android:textSize="20sp"/>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/background_dark"/>
+
                 <TextView
+                    android:id="@+id/user_courier_tv"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:text="快递查询"
                     android:textSize="20sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/background_dark"/>
 
                 <Button
                     android:id="@+id/user_exit_login_btn"

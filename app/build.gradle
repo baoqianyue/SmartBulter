@@ -27,7 +27,13 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     //Bmob SDK
-    compile 'cn.bmob.android:bmob-sdk:3.5.5'
+    compile('cn.bmob.android:bmob-sdk:3.5.5') {
+        exclude group: 'io.reactivex'
+    }
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    //RxVolley(解决jar包冲突)
+    compile('com.kymjs.rxvolley:rxvolley:1.1.4') {
+        exclude group: 'io.reactivex'
+    }
     testCompile 'junit:junit:4.12'
 }

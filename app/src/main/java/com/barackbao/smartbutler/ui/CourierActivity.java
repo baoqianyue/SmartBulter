@@ -9,11 +9,21 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.barackbao.smartbutler.adapter.CourierAdapter;
+import com.barackbao.smartbutler.entity.CourierBean;
 import com.barackbao.smartbutler.utils.StaticClass;
 
 import com.barackbao.smartbutler.R;
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by BarackBao on 2017/6/10.
@@ -24,6 +34,8 @@ public class CourierActivity extends BaseActivity implements View.OnClickListene
     private EditText courier_number_edt;
     private Button courier_go_btn;
     private ListView courier_content_lv;
+    private CourierBean bean;
+    private List<CourierBean> mList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,11 +72,36 @@ public class CourierActivity extends BaseActivity implements View.OnClickListene
                         @Override
                         public void onSuccess(String t) {
                             Toast.makeText(CourierActivity.this, t, Toast.LENGTH_SHORT).show();
+                            //解析json数据
+                            getJsonData(t);
+
                         }
                     });
                 } else {
                     Toast.makeText(this, "输入框不能为空", Toast.LENGTH_SHORT).show();
                 }
         }
+    }
+
+    private void getJsonData(String t) {
+        try {
+            JSONObject jsonObject = new JSONObject(t);
+            JSONObject result = jsonObject.getJSONObject("result");
+            JSONArray list = result.getJSONArray("list");
+            for (int i = 0; i < list.length(); i++) {
+                JSONObject object = (JSONObject) list.get(i);
+                bean.setRemark(object.getString("remark"));
+                bean.setCity(object.getString("zone"));
+                bean.setDate(object.getString("datetime"));
+                mList.add(bean);
+            }
+            //倒序
+            Collections.reverse(mList);
+            courier_content_lv.setAdapter(new CourierAdapter(CourierActivity.this, mList));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

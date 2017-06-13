@@ -54,7 +54,7 @@ public class CourierAdapter extends BaseAdapter {
         //判断是否第一次加载
         if (convertView == null) {
             holder = new ViewHolder();
-            mInflater.inflate(R.layout.courier_content_item, parent, false);
+            mInflater.inflate(R.layout.courier_content_item,parent);
             holder.courier_remark_tv = (TextView) convertView.findViewById(R.id.courier_remark_tv);
             holder.courier_city_tv = (TextView) convertView.findViewById(R.id.courier_city_tv);
             holder.courier_date_tv = (TextView) convertView.findViewById(R.id.courier_date_tv);

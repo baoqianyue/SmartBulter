@@ -3,6 +3,7 @@ package com.barackbao.smartbutler.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +37,7 @@ public class CourierActivity extends BaseActivity implements View.OnClickListene
     private ListView courier_content_lv;
     private CourierBean bean;
     private List<CourierBean> mList = new ArrayList<>();
+    private static final String TAG = "CourierActivity";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class CourierActivity extends BaseActivity implements View.OnClickListene
         courier_go_btn = (Button) findViewById(R.id.courier_go_btn);
         courier_content_lv = (ListView) findViewById(R.id.courier_content_lv);
         courier_go_btn.setOnClickListener(this);
+        bean = new CourierBean();
     }
 
     @Override
@@ -90,6 +93,7 @@ public class CourierActivity extends BaseActivity implements View.OnClickListene
             JSONArray list = result.getJSONArray("list");
             for (int i = 0; i < list.length(); i++) {
                 JSONObject object = (JSONObject) list.get(i);
+                Log.i(TAG, "getJsonData: "+object.toString());
                 bean.setRemark(object.getString("remark"));
                 bean.setCity(object.getString("zone"));
                 bean.setDate(object.getString("datetime"));

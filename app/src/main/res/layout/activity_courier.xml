@@ -9,13 +9,13 @@
         android:id="@+id/courier_name_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="sf"/>
+        android:text="zto"/>
 
     <EditText
         android:id="@+id/courier_number_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="575677355677"/>
+        android:text="780001302343"/>
 
     <Button
         android:id="@+id/courier_go_btn"

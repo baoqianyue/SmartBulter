@@ -74,7 +74,6 @@ public class CourierActivity extends BaseActivity implements View.OnClickListene
                     RxVolley.get(url, new HttpCallback() {
                         @Override
                         public void onSuccess(String t) {
-                            Toast.makeText(CourierActivity.this, t, Toast.LENGTH_SHORT).show();
                             //解析json数据
                             getJsonData(t);
 

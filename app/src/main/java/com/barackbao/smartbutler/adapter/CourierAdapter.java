@@ -1,6 +1,7 @@
 package com.barackbao.smartbutler.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.barackbao.smartbutler.R;
 import com.barackbao.smartbutler.entity.CourierBean;
+import com.barackbao.smartbutler.utils.StaticClass;
 
 import java.util.List;
 import java.util.zip.Inflater;
@@ -24,6 +26,7 @@ public class CourierAdapter extends BaseAdapter {
     //布局管理器
     private LayoutInflater mInflater;
     private CourierBean Bean;
+    private static  final String TAG = "CourierAdapter";
 
     public CourierAdapter(Context context, List<CourierBean> list) {
         this.mContext = context;
@@ -54,7 +57,8 @@ public class CourierAdapter extends BaseAdapter {
         //判断是否第一次加载
         if (convertView == null) {
             holder = new ViewHolder();
-            mInflater.inflate(R.layout.courier_content_item,parent);
+            convertView = mInflater.inflate(R.layout.courier_content_item,parent,false);
+            Log.i(TAG, "getView: "+convertView.toString());
             holder.courier_remark_tv = (TextView) convertView.findViewById(R.id.courier_remark_tv);
             holder.courier_city_tv = (TextView) convertView.findViewById(R.id.courier_city_tv);
             holder.courier_date_tv = (TextView) convertView.findViewById(R.id.courier_date_tv);

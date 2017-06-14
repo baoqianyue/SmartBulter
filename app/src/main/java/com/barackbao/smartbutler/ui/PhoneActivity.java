@@ -67,7 +67,6 @@ public class PhoneActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onSuccess(String t) {
                 super.onSuccess(t);
-                Toast.makeText(PhoneActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
                 parseJson(t);
             }
         });
@@ -89,13 +88,13 @@ public class PhoneActivity extends BaseActivity implements View.OnClickListener 
                     + "卡片类型：" + card + "\n");
             //设置图片
             switch (company) {
-                case "中国电信":
+                case "电信":
                     phone_company_imv.setImageResource(R.drawable.chinatelecom);
                     break;
-                case "中国联通":
+                case "联通":
                     phone_company_imv.setImageResource(R.drawable.chinaunion);
                     break;
-                case "中国移动":
+                case "移动":
                     phone_company_imv.setImageResource(R.drawable.chinamobile);
                     break;
             }

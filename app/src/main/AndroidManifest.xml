@@ -48,6 +48,7 @@
             android:label="注册"/>
         <activity android:name=".ui.ForgetActivity"/>
         <activity android:name=".ui.CourierActivity"/>
+        <activity android:name=".ui.PhoneActivity"/>
     </application>
 
 </manifest>

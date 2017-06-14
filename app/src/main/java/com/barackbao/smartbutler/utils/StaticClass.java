@@ -15,6 +15,8 @@ public class StaticClass {
     public static final String SOLVE_USER_ICON = "image_title";
     //快递单号查询key
     public static final String COURIER_KEY = "f6f3322cc4fd931afae2a87aef88b7b5";
+    //手机归属地查询key
+    public static final String PHONE_KEY = "0ce5de9a6e9eda8beff5ae1ab8ac2b2f";
 
 
 }

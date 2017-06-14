@@ -58,7 +58,6 @@ public class CourierAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.courier_content_item,parent,false);
-            Log.i(TAG, "getView: "+convertView.toString());
             holder.courier_remark_tv = (TextView) convertView.findViewById(R.id.courier_remark_tv);
             holder.courier_city_tv = (TextView) convertView.findViewById(R.id.courier_city_tv);
             holder.courier_date_tv = (TextView) convertView.findViewById(R.id.courier_date_tv);

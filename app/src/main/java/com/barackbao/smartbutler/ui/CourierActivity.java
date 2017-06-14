@@ -76,7 +76,6 @@ public class CourierActivity extends BaseActivity implements View.OnClickListene
                         public void onSuccess(String t) {
                             //解析json数据
                             getJsonData(t);
-
                         }
                     });
                 } else {
@@ -92,7 +91,6 @@ public class CourierActivity extends BaseActivity implements View.OnClickListene
             JSONArray list = result.getJSONArray("list");
             for (int i = 0; i < list.length(); i++) {
                 JSONObject object = (JSONObject) list.get(i);
-                Log.i(TAG, "getJsonData: "+object.toString());
                 bean.setRemark(object.getString("remark"));
                 bean.setCity(object.getString("zone"));
                 bean.setDate(object.getString("datetime"));

@@ -10,6 +10,11 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.barackbao.smartbutler.R;
+import com.barackbao.smartbutler.adapter.ButlerChatAdapter;
+import com.barackbao.smartbutler.entity.ChatData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by BarackBao on 2017/5/30.
@@ -20,6 +25,8 @@ public class ButlerFragment extends Fragment implements View.OnClickListener {
     private ListView butler_chat_lv;
     private Button butler_left_btn;
     private Button butler_right_btn;
+    private List<ChatData> mChatDatas = new ArrayList<>();
+    private ButlerChatAdapter mChatAdapter;
 
     @Nullable
     @Override
@@ -37,6 +44,10 @@ public class ButlerFragment extends Fragment implements View.OnClickListener {
         butler_right_btn = (Button) view.findViewById(R.id.butler_right_btn);
         butler_left_btn.setOnClickListener(this);
         butler_right_btn.setOnClickListener(this);
+
+        mChatAdapter = new ButlerChatAdapter(getContext(), mChatDatas);
+        butler_chat_lv.setAdapter(mChatAdapter);
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.barackbao.smartbutler.ui;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CheckBox store_password_cb;
     private TextView login_forget_password_tv;
     private CustomDialog login_wait_cdi;
+//    private Dialog login_wait_dl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         login_forget_password_tv.setOnClickListener(this);
         registered_btn.setOnClickListener(this);
         login_in_btn.setOnClickListener(this);
-        login_wait_cdi = new CustomDialog(this, 100, 100, R.layout.dialog_loading, R.style.Theme_Dialog,
+        login_wait_cdi = new CustomDialog(this, 50, 50, R.layout.dialog_loading, R.style.Theme_Dialog,
                 Gravity.CENTER, R.style.pop_dialog_anim);
         //屏幕点击无效
         login_wait_cdi.setCancelable(false);

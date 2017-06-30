@@ -17,6 +17,10 @@ public class StaticClass {
     public static final String COURIER_KEY = "f6f3322cc4fd931afae2a87aef88b7b5";
     //手机归属地查询key
     public static final String PHONE_KEY = "0ce5de9a6e9eda8beff5ae1ab8ac2b2f";
+    //微信精选
+    public static final String WECHAT_URL = "http://v.juhe.cn/weixin/query?key=";
+    public static final String WECHAT_KEY = "78f723dccf85aea324a3cf0daac97f35";
+
 
 
 }

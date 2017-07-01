@@ -2,6 +2,8 @@ package com.barackbao.smartbutler;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -28,8 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton fab_setting;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate( Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.activity_main);
 
         //去掉阴影
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initDatas();
         initViews();
     }
+
+
 
     private void initViews() {
         fab_setting = (FloatingActionButton) findViewById(R.id.fab_setting);

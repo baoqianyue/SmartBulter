@@ -18,7 +18,8 @@ import java.util.List;
  * Created by BarackBao on 2017/6/30.
  */
 
-public class WechatAdapter extends RecyclerView.Adapter<WechatAdapter.WechatListViewHolder> implements View.OnClickListener {
+public class WechatAdapter extends RecyclerView.Adapter<WechatAdapter.WechatListViewHolder>
+        implements View.OnClickListener {
     private Context mContext;
     private List<WechatData> mDataList;
     private WechatData mData;

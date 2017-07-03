@@ -49,6 +49,7 @@
         <activity android:name=".ui.ForgetActivity"/>
         <activity android:name=".ui.CourierActivity"/>
         <activity android:name=".ui.PhoneActivity"/>
+        <activity android:name=".ui.WechatContentActivity"/>
     </application>
 
 </manifest>

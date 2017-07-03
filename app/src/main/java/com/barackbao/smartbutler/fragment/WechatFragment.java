@@ -76,6 +76,12 @@ public class WechatFragment extends Fragment {
                 wechatContent_rv.setLayoutManager(manager);
                 WechatAdapter adapter = new WechatAdapter(getContext(),mList);
                 wechatContent_rv.setAdapter(adapter);
+                adapter.setOnItemClickListener(new WechatAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Toast.makeText(getContext(), mList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             } catch (JSONException e) {
                 e.printStackTrace();

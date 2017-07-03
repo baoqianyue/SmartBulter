@@ -18,11 +18,21 @@ import java.util.List;
  * Created by BarackBao on 2017/6/30.
  */
 
-public class WechatAdapter extends RecyclerView.Adapter<WechatAdapter.WechatListViewHolder> {
+public class WechatAdapter extends RecyclerView.Adapter<WechatAdapter.WechatListViewHolder> implements View.OnClickListener {
     private Context mContext;
     private List<WechatData> mDataList;
     private WechatData mData;
+    private OnItemClickListener mOnItemClickListener;
 
+    //定义点击事件回调接口
+    public static interface OnItemClickListener {
+        void onItemClick(View view,int position);
+    }
+
+    //设置点击事件监听器,暴露给调用者
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.mOnItemClickListener = onItemClickListener;
+    }
 
     class WechatListViewHolder extends RecyclerView.ViewHolder{
         private ImageView wechat_content_img;
@@ -54,6 +64,7 @@ public class WechatAdapter extends RecyclerView.Adapter<WechatAdapter.WechatList
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View v = inflater.inflate(R.layout.wechat_item,parent,false);
+        v.setOnClickListener(this);
         return new WechatListViewHolder(v);
     }
 
@@ -61,6 +72,16 @@ public class WechatAdapter extends RecyclerView.Adapter<WechatAdapter.WechatList
     public void onBindViewHolder(WechatListViewHolder holder, int position) {
         mData = mDataList.get(position);
         holder.bindView(mData);
+        holder.itemView.setTag(position);
+    }
+
+    //将点击事件转移给调用者
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null){
+
+            mOnItemClickListener.onItemClick(v, (Integer) v.getTag());
+        }
     }
 
     @Override
